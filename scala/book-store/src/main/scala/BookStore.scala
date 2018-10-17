@@ -1,17 +1,15 @@
 object BookStore {
 
-  def total(quantityOfBooks: List[Int]): Int = {
-    if (quantityOfBooks.isEmpty)
-      0
-    else {
-      val prices = groupBooks(quantityOfBooks).map { group =>
-        group.books.map(l => price(l.size)).sum
-      }
-      prices.min
-    }
-  }
+  def total(quantityOfBooks: List[Int]): Int =
+    if (quantityOfBooks.isEmpty) 0
+    else
+      groupBooks(quantityOfBooks)
+        .map(_.books
+          .map(l => price(l.size))
+          .sum).min
 
   private val bookPrice = 800
+
   def price(size: Int): Int =
     (size match {
       case 1 => bookPrice
@@ -48,13 +46,9 @@ object BookStore {
       }
     }
 
-    List(
-      internal(books, 5, List.empty, List.empty, List.empty),
-      internal(books, 4, List.empty, List.empty, List.empty),
-      internal(books, 3, List.empty, List.empty, List.empty),
-      internal(books, 2, List.empty, List.empty, List.empty),
-      internal(books, 1, List.empty, List.empty, List.empty)
-    )
+    (1 to 5)
+      .map(x => internal(books, x, List.empty, List.empty, List.empty))
+      .toList
   }
 
 }
