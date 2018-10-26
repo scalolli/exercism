@@ -44,4 +44,5 @@ trim xs = dropSpace $ reverse $ dropSpace $ (reverse xs)
 
 dropSpace :: String -> String
 dropSpace = dropWhile isSpace
-         
+             
+    
