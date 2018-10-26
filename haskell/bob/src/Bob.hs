@@ -21,10 +21,10 @@ endsWith :: String -> Reaction
 endsWith ys = 
     if(ys == "") then Fine else go ys
     where go xs 
-            | (containsNumbers xs && (lastChar xs == '!')) = ChillOut
+            | (containsNumbers xs && (lastChar xs == '!')) || 
+                (allCaps xs) || (lastChar xs == '!' && allCaps (init xs)) = ChillOut
             | (containsNumbers xs && (lastChar xs == '?')) = Sure
             | (containsNumbers xs) = Whatever
-            | (allCaps xs) || (lastChar xs == '!' && allCaps (init xs)) = ChillOut      
             | (lastChar xs == '?' && allCaps (init xs)) = CalmDown      
             | otherwise = case (lastChar xs) of
                             '?' -> Sure                    
